@@ -11,8 +11,10 @@ class Utilisateur extends Model
     protected $fillable = [
         'nom',
         'prenom',
-        'pseudo',
+        'username',
         'contact',
-        'mdp',
+        'password',
+        'derniere_connexion',
+        'date_password'
     ];
 }

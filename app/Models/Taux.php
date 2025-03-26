@@ -9,7 +9,9 @@ class Taux extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'apporteur_id',
+        'categorie_id',
         'pourcentage',
-        'sup'
+        'supprimer'
     ];
 }

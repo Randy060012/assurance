@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('typedepenses', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->boolean('sup');
+            $table->string('libelle')->nullable();
             $table->timestamps();
         });
     }

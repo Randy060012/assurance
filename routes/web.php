@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Assurance\ApporteurController;
+use App\Http\Controllers\Assurance\CategorieController;
+use App\Http\Controllers\Assurance\ContratController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +19,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    Route::controller(Controller::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard');
+
+    });
+
+    // Route pour le module contrat
+    Route::controller(ContratController::class)->group(function () {
+        Route::get('/contrat/nouveau', 'index')->name('index.contrat');
+        Route::get('/contrat/enregistrement', 'create')->name('index.create');
+
+    });
+
+    // Route pour le module apporteur
+    Route::controller(ApporteurController::class)->group(function () {
+        Route::get('/apporteur/nouveau', 'index')->name('index.apporteur');
+        Route::get('/apporteur/enregistrement', 'create')->name('apporteur.add');
+
+    });
+
+    // Route pour le module categorie
+    Route::controller(CategorieController::class)->group(function () {
+        Route::get('/categorie/nouveau', 'index')->name('index.categorie');
+        // Route::get('/contrat/enregistrement', 'create')->name('index.create');
+
+    });
 });
 
 

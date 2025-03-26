@@ -14,6 +14,7 @@ class Apporteur extends Model
         'prenom',
         'telephone',
         'taux_taxe',
-        'sup'
+        'supprimer'
     ];
 }
+

@@ -38,35 +38,6 @@ class AuthController extends Controller
         //
     }
 
-    // public function login(Request $request)
-    // {
-    //     $message = [
-    //         "email.required" => "Votre email est requis",
-    //         "email.exists" => "Votre email est invalide",
-    //         "password.required" => "Le mot de passe est requis",
-    //         "password.min" => "Le mot de passe est trop court",
-    //     ];
-
-    //     $validator = Validator::make($request->all(), [
-    //         "email" => "bail|required|email|exists:users,email",
-    //         "password" => "bail|required|min:8|max:50",
-    //     ], $message);
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Échec',
-    //         ], 400);
-    //     }
-    //     $creds = $request->only('email', 'password');
-    //     if (Auth::guard('web')->attempt($creds)) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Opération réussie',
-    //         ], 200);
-    //     }
-    // }
-
 
     public function login(Request $request)
     {

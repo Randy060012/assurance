@@ -9,16 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void 
     {
         Schema::create('apporteurs', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('nom');
+            $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
-            $table->string('telephone');
-            $table->integer('taux_taxe');
-            $table->boolean('sup');
+            $table->string('telephone')->nullable();
+            $table->integer('taux_taxe')->nullable();
+            $table->boolean('supprimer')->default(0);
             $table->timestamps();
         });
     }

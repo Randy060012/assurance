@@ -28,6 +28,42 @@
 
     <!-- Icons css -->
     <link href="{{ asset('velonic/layouts/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+
+
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('velonic/layouts/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Select2 css -->
+
+    <link href="{{ asset('velonic/layouts/assets/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Touchspin css -->
+    <link href="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Datepicker css -->
+    <link href="{{ asset('velonic/layouts/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Timepicker css -->
+    <link href="{{ asset('velonic/layouts/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- Flatpickr Timepicker css -->
+    <link href="{{ asset('velonic/layouts/assets/vendor/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css" />
+
+
+    <!-- Bootstrap Touchspin css -->
+    <link href="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
 </head>
 
 <body>
@@ -267,9 +303,82 @@
     <!-- Dashboard App js -->
     <script src="{{ asset('velonic/layouts/assets/js/pages/dashboard.js')}}"></script>
 
+    <!-- Datatables js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+
+    <!-- Datatable Demo Aapp js -->
+    <script src="{{ asset('velonic/layouts/assets/js/pages/datatable.init.js')}}"></script>
 
     <!-- App js -->
     <script src="{{ asset('velonic/layouts/assets/js/app.min.js')}}"></script>
+
+    <!--  Select2 Plugin Js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/select2/js/select2.min.js')}}"></script>
+
+    <!-- Bootstrap Datepicker Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+
+    <!-- Bootstrap Timepicker Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
+
+    <!-- Input Mask Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/jquery-mask-plugin/jquery.mask.min.js')}}"></script>
+
+    <!-- Bootstrap Touchspin Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
+
+    <!-- Bootstrap Maxlength Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
+
+    <!-- Typehead Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/handlebars/handlebars.min.js')}}"></script>
+    <script src="{{ asset('velonic/layouts/assets/vendor/typeahead.js/typeahead.bundle.min.js')}}"></script>
+
+    <!-- Flatpickr Timepicker Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/flatpickr/flatpickr.min.js')}}"></script>
+
+    <!-- Typehead Demo js -->
+    <script src="{{ asset('velonic/layouts/assets/js/pages/typehead.init.js')}}"></script>
+
+    <!-- Timepicker Demo js -->
+    <script src="{{ asset('velonic/layouts/assets/js/pages/timepicker.init.js')}}"></script>
+
+    <!-- App js -->
+    <script src="{{ asset('velonic/layouts/assets/js/app.min.js')}}"></script>
+
+      <!-- Bootstrap Touchspin Plugin js -->
+      <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
+
+    <script>
+        const exampleModal = document.getElementById('exampleModal')
+        exampleModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const recipient = button.getAttribute('data-bs-whatever')
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+            const modalTitle = exampleModal.querySelector('.modal-title')
+            const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+            modalTitle.textContent = `New message to ${recipient}`
+            modalBodyInput.value = recipient
+        })
+    </script>
 
 </body>
 

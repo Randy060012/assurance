@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('tauxes', function (Blueprint $table) {
             $table->id();
-            $table->string('pourcentage');
-            $table->boolean('sup');
+            $table->integer('apporteur_id');
+            $table->integer('categorie_id');
+            $table->string('pourcentage')->nullable();
+            $table->boolean('supprimer')->default(0);
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ class Reglement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'police',
+        'contrat_id',
         'date',
         'montant',
         'statut',
@@ -17,5 +17,6 @@ class Reglement extends Model
         'created_by',
         'updated_by',
         'annule',
+        'supprimer'
     ];
 }

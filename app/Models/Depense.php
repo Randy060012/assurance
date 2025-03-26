@@ -9,12 +9,14 @@ class Depense extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'type_depense_id',
         'libelle',
         'montant',
+        'description',
         'date',
         'type',
         'created_by',
         'updated_by',
-        'sup',
+        'supprimer',
     ];
 }

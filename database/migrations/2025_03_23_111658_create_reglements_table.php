@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('reglements', function (Blueprint $table) {
             $table->id();
-            $table->string('police')->unique();
-            $table->date('date');
-            $table->decimal('montant', 10, 0);
-            $table->boolean('statut');
-            $table->string('memo');
-            $table->integer('created_by');
-            $table->integer('updated_by');
-            $table->boolean('annule');
+            $table->integer('contrat_id');
+            $table->date('date')->nullable();
+            $table->decimal('montant', 10, 0)->nullable();
+            $table->boolean('statut')->nullable();
+            $table->string('memo')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->boolean('annule')->default(0);
+            $table->boolean('supprimer')->default(0);
             $table->timestamps();
         });
     }

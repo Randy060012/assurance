@@ -11,6 +11,6 @@ class Categorie extends Model
     protected $fillable = [
         'code',
         'libelle',
-        'sup'
+        'supprimer'
     ];
 }

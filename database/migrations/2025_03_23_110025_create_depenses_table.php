@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('depenses', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->decimal('montant', 11, 0);
-            $table->date('date');
-            $table->integer('type');
-            $table->integer('created_by');
-            $table->integer('updated_by');
-            $table->boolean('sup');
+            $table->integer('type_depense_id');
+            $table->string('libelle')->nullable();
+            $table->decimal('montant', 11, 0)->nullable();
+            $table->string('description')->nullable();
+            $table->date('date')->nullable();
+            $table->integer('type')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->boolean('supprimer')->default(0);
             $table->timestamps();
         });
     }

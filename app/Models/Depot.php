@@ -9,7 +9,7 @@ class Depot extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'police',
+        'contrat_id',
         'date',
         'montant',
         'libelle',
@@ -19,5 +19,6 @@ class Depot extends Model
         'created_by',
         'updated_by',
         'annule',
+        'supprimer'
     ];
 }

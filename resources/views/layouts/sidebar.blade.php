@@ -381,16 +381,32 @@
                 <div class="collapse" id="contratMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Nouveau</a>
+                            <a href="{{ route('index.contrat')}}">Nouveau</a>
                         </li>
                         <li>
                             <a href="javascript: void(0);">Recherche</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);">Categorie</a>
+                            <a href="{{ route('index.categorie')}}">Categorie</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="javascript: void(0);">Rapport</a>
+                        </li> -->
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#contratSecondLevel" aria-expanded="false" aria-controls="contratSecondLevel">
+                                <span> Rapport </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="contratSecondLevel">
+                                <ul class="side-nav-third-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Item 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Item 2</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -413,8 +429,21 @@
                         <li>
                             <a href="javascript: void(0);">Decaissement</a>
                         </li>
-                        <li>
-                            <a href="javascript: void(0);">Rapport</a>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#opeSecondLevel" aria-expanded="false" aria-controls="opeSecondLevel">
+                                <span> Rapport </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="opeSecondLevel">
+                                <ul class="side-nav-third-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Item 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Item 2</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -431,8 +460,21 @@
                         <li>
                             <a href="javascript: void(0);">Nouveau</a>
                         </li>
-                        <li>
-                            <a href="javascript: void(0);">Rapport</a>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#clientSecondLevel" aria-expanded="false" aria-controls="clientSecondLevel">
+                                <span> Rapport </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="clientSecondLevel">
+                                <ul class="side-nav-third-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Item 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Item 2</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -447,13 +489,26 @@
                 <div class="collapse" id="appMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Nouveau</a>
+                            <a href="{{ route('index.apporteur')}}">Nouveau</a>
                         </li>
                         <li>
                             <a href="javascript: void(0);">Taux commissions</a>
                         </li>
-                        <li>
-                            <a href="javascript: void(0);">Rapports</a>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#appSecondLevel" aria-expanded="false" aria-controls="appSecondLevel">
+                                <span> Rapport </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="appSecondLevel">
+                                <ul class="side-nav-third-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Item 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Item 2</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>

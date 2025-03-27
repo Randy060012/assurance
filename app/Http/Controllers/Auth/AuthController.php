@@ -45,12 +45,11 @@ class AuthController extends Controller
             "email.required" => "Votre email est requis",
             "email.exists" => "Votre email est invalide",
             "password.required" => "Le mot de passe est requis",
-            "password.min" => "Le mot de passe est trop court",
         ];
 
         $validator = Validator::make($request->all(), [
             "email" => "bail|required|email|exists:users,email",
-            "password" => "bail|required|min:6|max:50",
+            "password" => "bail|required",
         ], $message);
 
         if ($validator->fails()) {

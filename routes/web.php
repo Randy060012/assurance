@@ -53,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/client/nouveau', 'index')->name('index.client');
         Route::post('/client/creer', 'store')->name('client.store');
 
+        Route::post('/client/recherche', 'find')->name('index.client.recherche');
+
     });
 });
 

@@ -100,4 +100,33 @@ class ClientController extends Controller
     {
         //
     }
+
+
+    public function find(Request $request)
+    {
+        // Récupère la valeur de la recherche
+        $search = $request->search;
+
+        // Assure-toi que la recherche n'est pas vide
+        if (empty($search)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Aucun critère de recherche fourni.',
+            ]);
+        }
+
+        // Recherche en fonction de l'entrée de l'utilisateur dans les champs 'nom', 'prenom', 'code' et 'telephone'
+        $clients = Client::query()
+            ->where('nom', 'LIKE', "%$search%")
+            ->orWhere('prenom', 'LIKE', "%$search%")
+            ->orWhere('code', 'LIKE', "%$search%")
+            ->orWhere('telephone', 'LIKE', "%$search%")
+            ->get();
+
+        // Retourner les résultats
+        return response()->json([
+            'success' => true,
+            'clients' => $clients,
+        ]);
+    }
 }

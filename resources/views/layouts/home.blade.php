@@ -64,6 +64,8 @@
     <link href="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet"
         type="text/css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body>
@@ -358,8 +360,8 @@
     <!-- App js -->
     <script src="{{ asset('velonic/layouts/assets/js/app.min.js')}}"></script>
 
-      <!-- Bootstrap Touchspin Plugin js -->
-      <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
+    <!-- Bootstrap Touchspin Plugin js -->
+    <script src="{{ asset('velonic/layouts/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
 
     <script>
         const exampleModal = document.getElementById('exampleModal')
@@ -379,6 +381,9 @@
             modalBodyInput.value = recipient
         })
     </script>
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @yield('scripts')
 
 </body>
 

@@ -83,7 +83,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Categorie *</label>
-                                    <input type="text" class="form-control" name="categorie_id" placeholder="Enter insurance category" required>
+                                    <!-- <input type="text" class="form-control" name="categorie_id" placeholder="Enter insurance category" required> -->
+                                    <select class="form-control" name="categorie_id" required>
+                                        <option value="">Sélectionnez une categorie</option>
+                                        @foreach ($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{ $categorie->libelle }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Commission *</label>

@@ -1,0 +1,157 @@
+@extends('layouts.home')
+@section('content')
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ route('index.client')}}">Liste</a></li>
+                        <!-- <li class="breadcrumb-item active">Data Tables</li> -->
+                    </ol>
+                </div>
+                <h4 class="page-title">Liste des clients</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="header-title mb-0">Tableau</h4>
+                    <div>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#client-create-modal">Enregistrer</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Code</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Telephone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @foreach ($clients as $data)
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $data->code }}</td>
+                                <td>{{ $data->nom }}</td>
+                                <td>{{ $data->prenom }}</td>
+                                <td>{{ $data->telephone }}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            <!-- Répète pour les autres lignes -->
+                        </tbody>
+
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div> <!-- end row-->
+
+</div>
+
+<!-- Modal Bootstrap -->
+<div id="client-create-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="client-create-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Formulaire d'enregistrement</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="client-form">
+                @csrf
+                <div class="modal-body">
+
+                    <div class="row">
+                        <!-- <div class="mb-3">
+                            <label for="code" class="form-label">Code *</label>
+                            <input type="text" id="code" name="code" class="form-control" placeholder="Entrez une valeur">
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom *</label>
+                            <input type="text" id="nom" name="nom" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prenom *</label>
+                            <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telephone" class="form-label">Telephone *</label>
+                            <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).ready(function() {
+        $('#client-form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('client.store') }}",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+                        $('#client-form')[0].reset();
+                        $('#client-create-modal').modal('hide');
+                        setTimeout(function() {
+                            window.location.href = '/client/nouveau';
+                        }, 1500);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.log("Erreur AJAX : ", xhr.responseText);
+                    var errors = xhr.responseJSON;
+                    if (errors && errors.message) {
+                        toastr.error(errors.message);
+                    } else {
+                        toastr.error("Une erreur est survenue, veuillez réessayer.");
+                    }
+                }
+            });
+        });
+    });
+</script>
+@endsection

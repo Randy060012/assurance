@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Assurance;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apporteur;
+use App\Models\Categorie;
+use App\Models\Contrat;
 use Illuminate\Http\Request;
 
 class ContratController extends Controller
@@ -13,7 +16,10 @@ class ContratController extends Controller
     public function index()
     {
         //
-        return view('contrat/index');
+        $apporteurs = Apporteur::latest()->get();
+        $categories = Categorie::latest()->get();
+        $contrats = Contrat::latest()->get();
+        return view('contrat/index', compact('apporteurs','categories','contrats'));
     }
 
     /**
@@ -22,7 +28,9 @@ class ContratController extends Controller
     public function create()
     {
         //
-        return view('contrat/create');
+        $apporteurs = Apporteur::latest()->get();
+        $categories = Categorie::latest()->get();
+        return view('contrat/create',compact('apporteurs','categories'));
     }
 
     /**

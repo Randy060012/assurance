@@ -29,15 +29,15 @@
                         A jQuery Plugin to make masks on form fields and HTML elements.
                     </p>
                 </div>
-                <div class="card-body">
-                    <form action="#" method="POST">
+                <form action="#" id="apporteur-form">
+                    @csrf
+                    <div class="card-body">
                         <div class="row">
                             <!-- Première colonne -->
-                            <div class="col-md-4">
-
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Code *</label>
-                                    <input type="text" class="form-control" name="code" placeholder="Enter le code" required>
+                                    <label class="form-label">Nom *</label>
+                                    <input type="text" class="form-control" name="nom" placeholder="Enter le nom" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Telephone *</label>
@@ -46,10 +46,10 @@
                             </div>
 
                             <!-- Deuxième colonne -->
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Nom *</label>
-                                    <input type="text" class="form-control" name="nom" placeholder="Enter le nom" required>
+                                    <label class="form-label">Prenom *</label>
+                                    <input type="text" class="form-control" name="prenom" placeholder="Enter le prenom" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Taux taxe *</label>
@@ -58,18 +58,15 @@
                             </div>
 
                             <!-- Troisième colonne -->
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Prenom *</label>
-                                    <input type="text" class="form-control" name="prenom" placeholder="Enter le prenom" required>
-                                </div>
-                            </div>
+                            <!-- <div class="col-md-4">
+
+                            </div> -->
                         </div>
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
                 <!-- end card-body -->
             </div> <!-- end card -->
         </div> <!-- end col -->
@@ -78,4 +75,48 @@
 </div>
 
 
+@endsection
+@section('scripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).ready(function() {
+        $('#apporteur-form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('apporteur.store') }}",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+                        $('#apporteur-form')[0].reset();
+                        setTimeout(function() {
+                            window.location.href = '/apporteur/enregistrement';
+                        }, 1500);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.log("Erreur AJAX : ", xhr.responseText);
+                    var errors = xhr.responseJSON;
+                    if (errors && errors.message) {
+                        toastr.error(errors.message);
+                    } else {
+                        toastr.error("Une erreur est survenue, veuillez réessayer.");
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection

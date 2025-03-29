@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Apporteur extends Model
+class Client extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     protected $fillable = [
         'code',
         'nom',
         'prenom',
         'telephone',
-        'taux_taxe',
-        'supprimer'
     ];
 }
-

@@ -458,7 +458,7 @@
                 <div class="collapse" id="clientMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Nouveau</a>
+                            <a href="{{ route('index.client')}}">Nouveau</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#clientSecondLevel" aria-expanded="false" aria-controls="clientSecondLevel">

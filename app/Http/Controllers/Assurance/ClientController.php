@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Assurance;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apporteur;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
-class ApporteurController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ApporteurController extends Controller
     public function index()
     {
         //
-        $apporteurs = Apporteur::latest()->get();
-        return view('apporteur/index',compact('apporteurs'));
+        $clients = Client::latest()->get();
+        return view('client/index', compact('clients'));
     }
 
     /**
@@ -24,7 +24,6 @@ class ApporteurController extends Controller
     public function create()
     {
         //
-        return view('apporteur/create');
     }
 
     /**
@@ -36,7 +35,6 @@ class ApporteurController extends Controller
             'nom' => 'required|string|max:500',
             'prenom' => 'required|string|max:255',
             'telephone' => 'required|string',
-            'taux_taxe' => 'required|string',
         ]);
 
         try {
@@ -51,18 +49,17 @@ class ApporteurController extends Controller
 
             $code = $year . $firstLetter . $secondLetter . $thirdLetter;
 
-            $apporteur = Apporteur::create([
+            $client = Client::create([
                 'code' => $code,
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,
                 'telephone' => $request->telephone,
-                'taux_taxe' => $request->taux_taxe,
             ]);
 
             return response()->json([
                 'success' => true,
-                'message' => 'Apporteur ajoutée avec succès !',
-                'data' => $apporteur
+                'message' => 'Client ajoutée avec succès !',
+                'data' => $client
             ], 201);
         } catch (\Exception $e) {
             return response()->json([

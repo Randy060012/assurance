@@ -381,7 +381,7 @@
                 <div class="collapse" id="contratMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="{{ route('index.contrat')}}">Nouveau</a>
+                            <a href="{{ route('index.create')}}">Nouveau</a>
                         </li>
                         <li>
                             <a href="javascript: void(0);">Recherche</a>

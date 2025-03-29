@@ -9,8 +9,8 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('index.contrat')}}">liste</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('index.create')}}">Enregistrement</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('index.contrat')}}">liste</a></li>
                         <!-- <li class="breadcrumb-item active">Form Advanced</li> -->
                     </ol>
                 </div>

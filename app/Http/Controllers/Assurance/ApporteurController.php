@@ -38,19 +38,13 @@ class ApporteurController extends Controller
             'telephone' => 'required|string',
             'taux_taxe' => 'required|string',
         ]);
-
         try {
             // $code = strtoupper(Str::random(8));
-
             $year = date('Y');
-
             $firstLetter = chr(rand(ord('A'), ord('X')));
-
             $secondLetter = chr(ord($firstLetter) + 1);
             $thirdLetter = chr(ord($firstLetter) + 2);
-
             $code = $year . $firstLetter . $secondLetter . $thirdLetter;
-
             $apporteur = Apporteur::create([
                 'code' => $code,
                 'nom' => $request->nom,
@@ -59,16 +53,9 @@ class ApporteurController extends Controller
                 'taux_taxe' => $request->taux_taxe,
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Apporteur ajoutée avec succès !',
-                'data' => $apporteur
-            ], 201);
+            return back()->with('success', 'Apporteur ajouté avec succès');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur interne : ' . $e->getMessage()
-            ], 500);
+            return back()->with('error', 'Problème lors de l\'ajout d\'un apporteur');
         }
     }
 

@@ -56,16 +56,9 @@ class ClientController extends Controller
                 'telephone' => $request->telephone,
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Client ajoutée avec succès !',
-                'data' => $client
-            ], 201);
+            return back()->with('success', 'Client ajouté avec succès');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur interne : ' . $e->getMessage()
-            ], 500);
+            return back()->with('error', 'Problème lors de l\'ajout d\'un client');
         }
     }
 

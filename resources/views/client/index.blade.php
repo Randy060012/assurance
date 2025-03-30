@@ -76,7 +76,7 @@
                 <h4 class="modal-title">Formulaire d'enregistrement</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="client-form">
+            <form action="{{ route('client.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
 
@@ -111,47 +111,5 @@
 @endsection
 
 @section('scripts')
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-    $(document).ready(function() {
-        $('#client-form').submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "{{ route('client.store') }}",
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.success) {
-                        toastr.success(response.message);
-                        $('#client-form')[0].reset();
-                        $('#client-create-modal').modal('hide');
-                        setTimeout(function() {
-                            window.location.href = '/client/nouveau';
-                        }, 1500);
-                    } else {
-                        toastr.error(response.message);
-                    }
-                },
-                error: function(xhr) {
-                    console.log("Erreur AJAX : ", xhr.responseText);
-                    var errors = xhr.responseJSON;
-                    if (errors && errors.message) {
-                        toastr.error(errors.message);
-                    } else {
-                        toastr.error("Une erreur est survenue, veuillez réessayer.");
-                    }
-                }
-            });
-        });
-    });
-</script>
 @endsection

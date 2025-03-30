@@ -9,11 +9,11 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('index.apporteur')}}">Liste</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('apporteur.add')}}">Enregistrement</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('index.utilisateur')}}">Liste</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('utilisateur.add')}}">Enregistrement</a></li>
                     </ol>
                 </div>
-                <h4 class="page-title">Liste des apporteurs</h4>
+                <h4 class="page-title">Liste des utilisateurs</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="header-title mb-0">Tableau</h4>
                     <div>
-                        <a href="{{ route('apporteur.add')}}" type="button" class="btn btn-primary">Creation</a>
+                        <a href="{{ route('utilisateur.add')}}" type="button" class="btn btn-primary">Creation</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -33,30 +33,26 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Code</th>
                                 <th>Nom</th>
                                 <th>Prenom</th>
-                                <th>Telephone</th>
-                                <th>Taux taxe</th>
+                                <th>Username</th>
+                                <th>Contact</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach($apporteurs as $data)
+                            @foreach($utilisateurs as $data)
                             <tr>
-
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $data->code }}</td>
                                 <td>{{ $data->nom }}</td>
                                 <td>{{ $data->prenom }}</td>
-                                <td>{{ $data->telephone }}</td>
-                                <td>{{ $data->taux_taxe }}</td>
+                                <td>{{ $data->username }}</td>
+                                <td>{{ $data->contact }}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></button>
+                                    <a href="{{route('utilisateur.edit', $data->id)}}" class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></a>
                                     <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
                                 </td>
-
                             </tr>
                             @endforeach
                         </tbody>

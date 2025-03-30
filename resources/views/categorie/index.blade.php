@@ -28,8 +28,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
-
+                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100 table-sm">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -67,7 +66,7 @@
                     <h4 class="modal-title">Formulaire d'enregistrement</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="categorie-form">
+                <form action="{{ route('categorie.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -94,48 +93,5 @@
 @endsection
 
 @section('scripts')
-<script>
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $(document).ready(function() {
-        $('#categorie-form').submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "{{ route('categorie.store') }}",
-                type: "POST",
-                contentType: false,
-                processData: false,
-                data: formData,
-                dataType: "json",
-                success: function(response) {
-                    if (response.success) {
-                        toastr.success(response.message);
-                        $('#categorie-form')[0].reset();
-                        $('#standard-modal').modal('hide');
-                        setTimeout(function() {
-                            window.location.href = '/categorie/nouveau';
-                        }, 1500);
-                    } else {
-                        toastr.error(response.message);
-                    }
-                },
-                error: function(xhr) {
-                    console.log("Erreur AJAX : ", xhr.responseText);
-                    var errors = xhr.responseJSON;
-                    if (errors && errors.message) {
-                        toastr.error(errors.message);
-                    } else {
-                        toastr.error("Une erreur est survenue, veuillez réessayer.");
-                    }
-                }
-            });
-        });
-    });
-</script>
 @endsection

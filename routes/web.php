@@ -4,6 +4,7 @@ use App\Http\Controllers\Assurance\ApporteurController;
 use App\Http\Controllers\Assurance\CategorieController;
 use App\Http\Controllers\Assurance\ClientController;
 use App\Http\Controllers\Assurance\ContratController;
+use App\Http\Controllers\Assurance\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/apporteur/nouveau', 'index')->name('index.apporteur');
         Route::get('/apporteur/enregistrement', 'create')->name('apporteur.add');
         Route::post('/apporteur/creer', 'store')->name('apporteur.store');
-
     });
 
     // Route pour le module categorie
@@ -52,7 +52,15 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
         Route::get('/client/nouveau', 'index')->name('index.client');
         Route::post('/client/creer', 'store')->name('client.store');
+    });
 
+    // Route pour le module utilisateur
+    Route::controller(UtilisateurController::class)->group(function () {
+        Route::get('/utilisateur/nouveau', 'index')->name('index.utilisateur');
+        Route::get('/utilisateur/enregistrement', 'create')->name('utilisateur.add');
+        Route::post('/utilisateur/creer', 'store')->name('utilisateur.store');
+        Route::get('/utilisateur/editer/{id}',  'edit')->name('utilisateur.edit');
+        Route::put('/utilisateur/modification/{id}',  'update')->name('utilisateur.update');
     });
 });
 

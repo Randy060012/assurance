@@ -42,18 +42,10 @@ class CategorieController extends Controller
 
         try {
             // $code = strtoupper(Str::random(8));
-
-            // Année actuelle
             $year = date('Y');
-
-            // Générer une lettre aléatoire entre 'A' et 'X'
             $firstLetter = chr(rand(ord('A'), ord('X')));
-
-            // Générer les deux lettres suivantes
             $secondLetter = chr(ord($firstLetter) + 1);
             $thirdLetter = chr(ord($firstLetter) + 2);
-
-            // Construire le code final
             $code = $year . $firstLetter . $secondLetter . $thirdLetter;
 
             $categorie = Categorie::create([
@@ -61,16 +53,9 @@ class CategorieController extends Controller
                 'libelle' => $request->libelle,
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Catégorie ajoutée avec succès !',
-                'data' => $categorie
-            ], 201);
+            return back()->with('success', 'Categorie ajouté avec succès');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur interne : ' . $e->getMessage()
-            ], 500);
+            return back()->with('error', 'Problème lors de l\'ajout d\'un categorie');
         }
     }
 

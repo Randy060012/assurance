@@ -523,10 +523,10 @@
                 <div class="collapse" id="utiMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Nouveau</a>
+                            <a href="{{ route('utilisateur.add')}}">Nouveau</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);">Liste</a>
+                            <a href="{{ route('index.utilisateur')}}">Liste</a>
                         </li>
                         <li>
                             <a href="javascript: void(0);">Role</a>

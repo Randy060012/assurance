@@ -383,7 +383,9 @@
     </script>
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @include('toastr-message')
     @yield('scripts')
+
 
 </body>
 

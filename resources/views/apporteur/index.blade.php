@@ -53,7 +53,7 @@
                                 <td>{{ $data->telephone }}</td>
                                 <td>{{ $data->taux_taxe }}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></button>
+                                    <a href="{{route('apporteur.edit', $data->id)}}" class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></a>
                                     <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
                                 </td>
 

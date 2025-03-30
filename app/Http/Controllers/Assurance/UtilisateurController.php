@@ -98,6 +98,7 @@ class UtilisateurController extends Controller
             $prenomPart = strtoupper(substr($request->prenom, 0, 3));
             $newUsername = $nomPart . $prenomPart . $year;
 
+        
             $utilisateur->update([
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,

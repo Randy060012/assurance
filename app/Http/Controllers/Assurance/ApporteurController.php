@@ -15,7 +15,7 @@ class ApporteurController extends Controller
     {
         //
         $apporteurs = Apporteur::latest()->get();
-        return view('apporteur/index',compact('apporteurs'));
+        return view('apporteur/index', compact('apporteurs'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ApporteurController extends Controller
         $request->validate([
             'nom' => 'required|string|max:500',
             'prenom' => 'required|string|max:255',
-            'telephone' => 'required|string',
+            'telephone' => 'required|string|unique:apporteurs,telephone,',
             'taux_taxe' => 'required|string',
         ]);
         try {
@@ -73,6 +73,8 @@ class ApporteurController extends Controller
     public function edit(string $id)
     {
         //
+        $data = Apporteur::find($id);
+        return view('apporteur/edit', compact('data'));
     }
 
     /**
@@ -81,6 +83,36 @@ class ApporteurController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'nom' => 'required|string|max:500',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'required|string|unique:apporteurs,telephone,' . $id,
+            'taux_taxe' => 'required|string',
+        ]);
+
+        try {
+            $apporteur = Apporteur::findOrFail($id);
+
+            if (empty($apporteur->code)) {
+                $year = date('Y');
+                $firstLetter = chr(rand(ord('A'), ord('X')));
+                $secondLetter = chr(ord($firstLetter) + 1);
+                $thirdLetter = chr(ord($firstLetter) + 2);
+                $apporteur->code = $year . $firstLetter . $secondLetter . $thirdLetter;
+            }
+
+            $apporteur->update([
+                'code' => $apporteur->code,
+                'nom' => $request->nom,
+                'prenom' => $request->prenom,
+                'telephone' => $request->telephone,
+                'taux_taxe' => $request->taux_taxe,
+            ]);
+
+            return redirect()->route('index.apporteur')->with('success', 'Apporteur mis à jour avec succès');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Problème lors de la mise à jour de l\'apporteur');
+        }
     }
 
     /**

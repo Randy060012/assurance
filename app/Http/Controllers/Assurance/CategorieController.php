@@ -79,9 +79,36 @@ class CategorieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+
+        $request->validate([
+            'libelle' => 'required|string|max:255',
+        ]);
+
+        try {
+            $catg_id = $request->input('catg_id');
+            $categorie = Categorie::findOrFail($catg_id);
+
+
+            if (empty($categorie->code)) {
+                $year = date('Y');
+                $firstLetter = chr(rand(ord('A'), ord('X')));
+                $secondLetter = chr(ord($firstLetter) + 1);
+                $thirdLetter = chr(ord($firstLetter) + 2);
+                $categorie->code = $year . $firstLetter . $secondLetter . $thirdLetter;
+            }
+
+            $categorie->update([
+                'code' => $categorie->code,
+                'libelle' => $request->libelle,
+            ]);
+
+            return back()->with('success', 'Categorie mis à jour avec succès');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Problème lors de la mise à jour d\'une categorie');
+        }
     }
 
     /**

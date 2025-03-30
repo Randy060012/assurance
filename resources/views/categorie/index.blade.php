@@ -45,7 +45,7 @@
                                 <td>{{ $data->code }}</td>
                                 <td>{{ $data->libelle }}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></button>
+                                    <button class="btn btn-warning btn-sm editbtn" onclick="updateCategorie('{{json_encode($data)}}')"><i class="ri-pencil-fill"></i></button>
                                     <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
                                 </td>
                             </tr>
@@ -88,10 +88,72 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Update Modal Bootstrap -->
+    <div id="update-standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-standard-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Formulaire de modification</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('categorie.update') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" id="catg_id" name="catg_id" />
+                            <!-- <div class="mb-3">
+                                <label for="code" class="form-label">Code *</label>
+                                <input type="text" id="code" name="code" class="form-control" placeholder="Entrez une valeur">
+                            </div> -->
+                            <div class="mb-3">
+                                <label for="libelle" class="form-label">Libelle *</label>
+                                <input type="text" id="edit_libelle" name="libelle" class="form-control" placeholder="Entrez une valeur">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-secondary" id="toastr-one">Submit</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
 
-@section('scripts')
+@section('scripts') 
+<script>
+    function updateCategorie(data) {
+        let parsedData = JSON.parse(data)
 
+        Swal.fire({
+            title: 'Êtes-vous sûr de vouloir modifier cette categorie ?',
+            text: "Cette action modifiera les informations existantes.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, continuer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log('clik', parsedData)
+                $('#edit_libelle').val(parsedData.libelle);
+                $('#catg_id').val(parsedData.id);
+                $('#update-standard-modal').modal('show');
+            }
+        });
+
+        $(document).ready(function() {
+            $(document).on('click', '.editbtn', function() {
+
+            });
+        });
+    }
+</script>
 @endsection

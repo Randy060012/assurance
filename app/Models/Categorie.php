@@ -13,4 +13,9 @@ class Categorie extends Model
         'libelle',
         'supprimer'
     ];
+
+    public function taux()
+    {
+        return $this->hasMany(Taux::class);
+    }
 }

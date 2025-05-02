@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('content')
+@section('content') 
     <div class="container-fluid">
 
         <!-- start page title -->

@@ -41,12 +41,9 @@ class ClientController extends Controller
             // $code = strtoupper(Str::random(8));
 
             $year = date('Y');
-
             $firstLetter = chr(rand(ord('A'), ord('X')));
-
             $secondLetter = chr(ord($firstLetter) + 1);
             $thirdLetter = chr(ord($firstLetter) + 2);
-
             $code = $year . $firstLetter . $secondLetter . $thirdLetter;
 
             $client = Client::create([
@@ -56,16 +53,9 @@ class ClientController extends Controller
                 'telephone' => $request->telephone,
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Client ajoutée avec succès !',
-                'data' => $client
-            ], 201);
+            return back()->with('success', 'Client ajouté avec succès');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erreur interne : ' . $e->getMessage()
-            ], 500);
+            return back()->with('error', 'Problème lors de l\'ajout d\'un client');
         }
     }
 
@@ -88,9 +78,39 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+
+        $request->validate([
+            'nom' => 'required|string|max:500',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'required|string',
+        ]);
+
+        try {
+            $client_id = $request->input('client_id');
+            $client = Client::findOrFail($client_id);
+
+            if (empty($client->code)) {
+                $year = date('Y');
+                $firstLetter = chr(rand(ord('A'), ord('X')));
+                $secondLetter = chr(ord($firstLetter) + 1);
+                $thirdLetter = chr(ord($firstLetter) + 2);
+                $client->code = $year . $firstLetter . $secondLetter . $thirdLetter;
+            }
+
+            $client->update([
+                'code' => $client->code,
+                'nom' => $request->nom,
+                'prenom' => $request->prenom,
+                'telephone' => $request->telephone,
+            ]);
+
+            return back()->with('success', 'Client mis à jour avec succès');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Problème lors de la mise à jour d\'un client');
+        }
     }
 
     /**

@@ -68,8 +68,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
-    
-
 
 </head>
 
@@ -388,8 +386,15 @@
     </script>
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @include('toastr-message')
     @yield('scripts')
-
+    <style>
+        .toast {
+            opacity: 1 !important;
+        }
+    </style>
+    <!--- SweetAlert--->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 <!-- Mirrored from techzaa.getappui.com/velonic/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Sep 2024 12:21:02 GMT -->

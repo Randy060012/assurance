@@ -4,6 +4,8 @@ use App\Http\Controllers\Assurance\ApporteurController;
 use App\Http\Controllers\Assurance\CategorieController;
 use App\Http\Controllers\Assurance\ClientController;
 use App\Http\Controllers\Assurance\ContratController;
+use App\Http\Controllers\Assurance\TauxController;
+use App\Http\Controllers\Assurance\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -36,13 +38,23 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/apporteur/nouveau', 'index')->name('index.apporteur');
         Route::get('/apporteur/enregistrement', 'create')->name('apporteur.add');
         Route::post('/apporteur/creer', 'store')->name('apporteur.store');
-
+        Route::get('/apporteur/editer/{id}',  'edit')->name('apporteur.edit');
+        Route::put('/apporteur/modification/{id}',  'update')->name('apporteur.update');
     });
 
     // Route pour le module categorie
     Route::controller(CategorieController::class)->group(function () {
         Route::get('/categorie/nouveau', 'index')->name('index.categorie');
         Route::post('/categorie/enregistrement', 'store')->name('categorie.store');
+        Route::put('/categorie/modification/categorie', 'update')->name('categorie.update');
+        // Route::get('/contrat/enregistrement', 'create')->name('index.create');
+
+    });
+
+    Route::controller(TauxController::class)->group(function () {
+        Route::get('/taux/nouveau', 'index')->name('index.taux');
+        Route::post('/taux/enregistrement', 'store')->name('taux.store');
+        Route::put('/taux/modification/taux', 'update')->name('taux.update');
         // Route::get('/contrat/enregistrement', 'create')->name('index.create');
 
     });
@@ -52,9 +64,18 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
         Route::get('/client/nouveau', 'index')->name('index.client');
         Route::post('/client/creer', 'store')->name('client.store');
-
         Route::post('/client/recherche', 'find')->name('index.client.recherche');
+        Route::put('/client/modification/client', 'update')->name('client.update');
 
+    });
+
+    // Route pour le module utilisateur
+    Route::controller(UtilisateurController::class)->group(function () {
+        Route::get('/utilisateur/nouveau', 'index')->name('index.utilisateur');
+        Route::get('/utilisateur/enregistrement', 'create')->name('utilisateur.add');
+        Route::post('/utilisateur/creer', 'store')->name('utilisateur.store');
+        Route::get('/utilisateur/editer/{id}',  'edit')->name('utilisateur.edit');
+        Route::put('/utilisateur/modification/{id}',  'update')->name('utilisateur.update');
     });
 });
 
@@ -72,4 +93,8 @@ Route::get('/logout', function () {
 
 Route::get('/register', function () {
     return view('auth/register');
+});
+
+Route::get('/page', function () {
+    return view('welcome');
 });

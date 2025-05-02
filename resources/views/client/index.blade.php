@@ -51,7 +51,7 @@
                                 <td>{{ $data->prenom }}</td>
                                 <td>{{ $data->telephone }}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm"><i class="ri-pencil-fill"></i></button>
+                                    <button class="btn btn-warning btn-sm editbtn" onclick="updateClient('{{json_encode($data)}}')"><i class="ri-pencil-fill"></i></button>
                                     <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
                                 </td>
                             </tr>
@@ -76,7 +76,7 @@
                 <h4 class="modal-title">Formulaire d'enregistrement</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="client-form">
+            <form action="{{ route('client.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
 
@@ -108,50 +108,81 @@
         </div>
     </div>
 </div>
+
+<!--Update Modal Bootstrap -->
+<div id="update-client-create-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-client-create-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Formulaire d'enregistrement</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('client.update') }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+
+                    <div class="row">
+                        <input type="hidden" id="client_id" name="client_id" />
+                        <!-- <div class="mb-3">
+                            <label for="code" class="form-label">Code *</label>
+                            <input type="text" id="code" name="code" class="form-control" placeholder="Entrez une valeur">
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom *</label>
+                            <input type="text" id="edit_nom" name="nom" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prenom *</label>
+                            <input type="text" id="edit_prenom" name="prenom" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telephone" class="form-label">Telephone *</label>
+                            <input type="text" id="edit_telephone" name="telephone" class="form-control" placeholder="Entrez une valeur">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    function updateClient(data) {
+        let parsedData = JSON.parse(data)
 
-    $(document).ready(function() {
-        $('#client-form').submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "{{ route('client.store') }}",
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.success) {
-                        toastr.success(response.message);
-                        $('#client-form')[0].reset();
-                        $('#client-create-modal').modal('hide');
-                        setTimeout(function() {
-                            window.location.href = '/client/nouveau';
-                        }, 1500);
-                    } else {
-                        toastr.error(response.message);
-                    }
-                },
-                error: function(xhr) {
-                    console.log("Erreur AJAX : ", xhr.responseText);
-                    var errors = xhr.responseJSON;
-                    if (errors && errors.message) {
-                        toastr.error(errors.message);
-                    } else {
-                        toastr.error("Une erreur est survenue, veuillez réessayer.");
-                    }
-                }
+        Swal.fire({
+            title: 'Êtes-vous sûr de vouloir modifier ce client ?',
+            text: "Cette action modifiera les informations existantes.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, continuer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log('clik', parsedData)
+                $('#edit_nom').val(parsedData.nom);
+                $('#edit_prenom').val(parsedData.prenom);
+                $('#edit_telephone').val(parsedData.telephone);
+                $('#client_id').val(parsedData.id);
+                $('#update-client-create-modal').modal('show');
+            }
+        });
+
+        $(document).ready(function() {
+            $(document).on('click', '.editbtn', function() {
+
             });
         });
-    });
+    }
 </script>
 @endsection

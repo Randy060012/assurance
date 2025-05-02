@@ -4,6 +4,7 @@ use App\Http\Controllers\Assurance\ApporteurController;
 use App\Http\Controllers\Assurance\CategorieController;
 use App\Http\Controllers\Assurance\ClientController;
 use App\Http\Controllers\Assurance\ContratController;
+use App\Http\Controllers\Assurance\TauxController;
 use App\Http\Controllers\Assurance\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
@@ -46,6 +47,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/categorie/nouveau', 'index')->name('index.categorie');
         Route::post('/categorie/enregistrement', 'store')->name('categorie.store');
         Route::put('/categorie/modification/categorie', 'update')->name('categorie.update');
+        // Route::get('/contrat/enregistrement', 'create')->name('index.create');
+
+    });
+
+    Route::controller(TauxController::class)->group(function () {
+        Route::get('/taux/nouveau', 'index')->name('index.taux');
+        Route::post('/taux/enregistrement', 'store')->name('taux.store');
+        Route::put('/taux/modification/taux', 'update')->name('taux.update');
         // Route::get('/contrat/enregistrement', 'create')->name('index.create');
 
     });

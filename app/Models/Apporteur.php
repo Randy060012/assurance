@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apporteur extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     protected $fillable = [
         'code',
         'nom',
@@ -16,5 +16,10 @@ class Apporteur extends Model
         'taux_taxe',
         'supprimer'
     ];
+
+    public function taux()
+    {
+        return $this->hasMany(Taux::class);
+    }
 }
 

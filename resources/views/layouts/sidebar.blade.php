@@ -389,6 +389,9 @@
                         <li>
                             <a href="{{ route('index.categorie')}}">Categorie</a>
                         </li>
+                        <li>
+                            <a href="{{ route('index.taux')}}">Taux</a>
+                        </li>
                         <!-- <li>
                             <a href="javascript: void(0);">Rapport</a>
                         </li> -->
@@ -421,13 +424,7 @@
                 <div class="collapse" id="opeMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Encaissement</a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);">Depot</a>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);">Decaissement</a>
+                            <a href="javascript: void(0);">Caisse</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#opeSecondLevel" aria-expanded="false" aria-controls="opeSecondLevel">

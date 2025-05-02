@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('prenom')->nullable();
             $table->string('telephone')->nullable();
             $table->string('taux_taxe')->nullable();
+            $table->string('solde')->nullable();
             $table->boolean('supprimer')->default(0);
             $table->timestamps();
         });

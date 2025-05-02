@@ -14,4 +14,15 @@ class Taux extends Model
         'pourcentage',
         'supprimer'
     ];
+
+    public function apporteur()
+    {
+        return $this->belongsTo(Apporteur::class);
+    }
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
+
 }

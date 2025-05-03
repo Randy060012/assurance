@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apporteur;
 use App\Models\Categorie;
 use App\Models\Contrat;
+use App\Models\Taux;
 use Illuminate\Http\Request;
 
 class ContratController extends Controller
@@ -19,7 +20,18 @@ class ContratController extends Controller
         $apporteurs = Apporteur::latest()->get();
         $categories = Categorie::latest()->get();
         $contrats = Contrat::latest()->get();
-        return view('contrat/index', compact('apporteurs','categories','contrats'));
+        return view('contrat/index', compact('apporteurs', 'categories', 'contrats'));
+    }
+
+    public function getApporteur($categorie_id)
+    {
+        $taux = Taux::with('apporteur')->where('categorie_id', $categorie_id)->first();
+
+        if (!$taux || !$taux->apporteur) {
+            return response()->json(['error' => 'Aucun apporteur trouvé'], 404);
+        }
+
+        return response()->json($taux->apporteur);
     }
 
     /**
@@ -30,7 +42,7 @@ class ContratController extends Controller
         //
         $apporteurs = Apporteur::latest()->get();
         $categories = Categorie::latest()->get();
-        return view('contrat/create',compact('apporteurs','categories'));
+        return view('contrat/create', compact('apporteurs', 'categories'));
     }
 
     /**

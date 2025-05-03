@@ -38,7 +38,8 @@ class TauxController extends Controller
         //
         $request->validate([
             'apporteur_id' => 'required|integer|exists:apporteurs,id',
-            'categorie_id' => 'required|integer|exists:categories,id',
+            'categorie_id' => 'required|array|min:1',
+            'categorie_id.*' => 'required|integer|exists:categories,id',
             'pourcentage' => 'required|numeric|min:0|max:100',
         ], [
             'apporteur_id.required' => 'Le champ apporteur est obligatoire.',
@@ -46,8 +47,9 @@ class TauxController extends Controller
             'apporteur_id.exists' => 'L’apporteur sélectionné n’existe pas.',
 
             'categorie_id.required' => 'Le champ catégorie est obligatoire.',
+            'categorie_id.array' => 'Les catégories doivent être dans une liste.',
             'categorie_id.integer' => 'La catégorie sélectionnée est invalide.',
-            'categorie_id.exists' => 'La catégorie sélectionnée n’existe pas.',
+            'categorie_id.*.exists' => 'La catégorie sélectionnée n’existe pas.',
 
             'pourcentage.required' => 'Le champ pourcentage est obligatoire.',
             'pourcentage.numeric' => 'Le pourcentage doit être un nombre.',
@@ -57,11 +59,19 @@ class TauxController extends Controller
 
         try {
 
-            $taux  = Taux::create([
-                'apporteur_id' => $request->apporteur_id,
-                'categorie_id' => $request->categorie_id,
-                'pourcentage' => $request->pourcentage,
-            ]);
+            // $taux  = Taux::create([
+            //     'apporteur_id' => $request->apporteur_id,
+            //     'categorie_id' => $request->categorie_id,
+            //     'pourcentage' => $request->pourcentage,
+            // ]);
+
+            foreach ($request->categorie_id as $catId) {
+                Taux::create([
+                    'apporteur_id' => $request->apporteur_id,
+                    'categorie_id' => $catId,
+                    'pourcentage' => $request->pourcentage,
+                ]);
+            }
 
             return back()->with('success', 'Taux ajouté avec succès');
         } catch (\Exception $e) {

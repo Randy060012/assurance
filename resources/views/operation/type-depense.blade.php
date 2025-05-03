@@ -9,10 +9,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('index.taux')}}">Liste</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('index.tdd')}}">Liste</a></li>
                     </ol>
                 </div>
-                <h4 class="page-title">Liste des taux</h4>
+                <h4 class="page-title">Liste des types de dépenses</h4>
             </div>
         </div>
     </div>
@@ -32,20 +32,16 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Apporteur</th>
-                                <th>Categorie</th>
-                                <th>Pourcentage</th>
+                                <th>Libelle</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($tauxs as $data)
+                            @foreach ($type_depenses as $data)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $data->apporteur->nom }}</td>
-                                <td>{{$data->categorie->libelle}}</td>
-                                <td>{{ $data->pourcentage }}</td>
+                                <td>{{ $data->libelle }}</td>
                                 <td>
                                     <button class="btn btn-warning btn-sm editbtn" onclick="updateCategorie('{{json_encode($data)}}')"><i class="ri-pencil-fill"></i></button>
                                     <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-fill"></i></button>
@@ -68,34 +64,13 @@
                     <h4 class="modal-title">Formulaire d'enregistrement</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('taux.store') }}" method="POST">
+                <form action="{{ route('tdd.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <!-- <div class="mb-3">
-                                <label for="code" class="form-label">Code *</label>
-                                <input type="text" id="code" name="code" class="form-control" placeholder="Entrez une valeur">
-                            </div> -->
                             <div class="mb-3">
-                                <label class="form-label">Apporteur <font color="red">*</font></label>
-                                <select class="form-control" name="apporteur_id" required>
-                                    <option value="">Sélectionnez un apporteur</option>
-                                    @foreach ($apporteurs as $data)
-                                    <option value="{{ $data->id }}">{{ $data->nom }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Catégories <font color="red">*</font></label>
-                                <select class="form-control" name="categorie_id[]" multiple required>
-                                    @foreach ($categories as $data)
-                                    <option value="{{ $data->id }}">{{ $data->libelle }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pourcentage" class="form-label">Pourcentage <font color="red">*</font></label>
-                                <input type="number" id="pourcentage" name="pourcentage" class="form-control" placeholder="Entrez le pourcentage">
+                                <label for="libelle" class="form-label">Libelle *</label>
+                                <input type="text" id="libelle" name="libelle" class="form-control" placeholder="Entrez un type de depense">
                             </div>
                         </div>
                     </div>

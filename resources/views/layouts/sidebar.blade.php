@@ -389,9 +389,6 @@
                         <li>
                             <a href="{{ route('index.categorie')}}">Categorie</a>
                         </li>
-                        <li>
-                            <a href="{{ route('index.taux')}}">Taux</a>
-                        </li>
                         <!-- <li>
                             <a href="javascript: void(0);">Rapport</a>
                         </li> -->
@@ -424,7 +421,10 @@
                 <div class="collapse" id="opeMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Caisse</a>
+                            <a href="{{ route('index.depense')}}">Caisse</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('index.tdd')}}">Types-dépenses</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#opeSecondLevel" aria-expanded="false" aria-controls="opeSecondLevel">
@@ -489,7 +489,7 @@
                             <a href="{{ route('index.apporteur')}}">Nouveau</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);">Taux commissions</a>
+                            <a href="{{ route('index.taux')}}">Taux commissions</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#appSecondLevel" aria-expanded="false" aria-controls="appSecondLevel">

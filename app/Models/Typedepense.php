@@ -11,4 +11,9 @@ class Typedepense extends Model
     protected $fillable = [
         'libelle',
     ];
+
+    public function depense()
+    {
+        return $this->hasMany(Depense::class);
+    }
 }

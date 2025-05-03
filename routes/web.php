@@ -4,6 +4,7 @@ use App\Http\Controllers\Assurance\ApporteurController;
 use App\Http\Controllers\Assurance\CategorieController;
 use App\Http\Controllers\Assurance\ClientController;
 use App\Http\Controllers\Assurance\ContratController;
+use App\Http\Controllers\Assurance\OperationController;
 use App\Http\Controllers\Assurance\TauxController;
 use App\Http\Controllers\Assurance\UtilisateurController;
 use App\Http\Controllers\Auth\AuthController;
@@ -31,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ContratController::class)->group(function () {
         Route::get('/contrat/nouveau', 'index')->name('index.contrat');
         Route::get('/contrat/enregistrement', 'create')->name('index.create');
+        Route::get('/get-apporteur/{categorie_id}','getApporteur');
     });
 
     // Route pour le module apporteur
@@ -66,6 +68,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/client/creer', 'store')->name('client.store');
         Route::post('/client/recherche', 'find')->name('index.client.recherche');
         Route::put('/client/modification/client', 'update')->name('client.update');
+
+    });
+
+    Route::controller(OperationController::class)->group(function () {
+        Route::get('/operation/nouvelle/depense', 'index')->name('index.depense');
+        Route::get('/operation/creer/depense', 'create')->name('depense.add');
+        Route::post('/operation/enregistrement/depense', 'store')->name('depense.store');
+        Route::put('/operation/modification/depense', 'update')->name('depense.update');
+
+        //Type de depenses
+        Route::get('/operation/nouvelle/type-de-depense', 'index_tdd')->name('index.tdd');
+        Route::post('/operation/enregistrement/type-de-depense', 'store_tdd')->name('tdd.store');
 
     });
 

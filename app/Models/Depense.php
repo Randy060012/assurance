@@ -19,4 +19,9 @@ class Depense extends Model
         'updated_by',
         'supprimer',
     ];
+
+    public function tydp()
+    {
+        return $this->belongsTo(Typedepense::class, 'type_depense_id');
+    }
 }

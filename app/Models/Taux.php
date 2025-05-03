@@ -17,12 +17,12 @@ class Taux extends Model
 
     public function apporteur()
     {
-        return $this->belongsTo(Apporteur::class);
+        return $this->belongsTo(Apporteur::class, 'apporteur_id');
     }
 
     public function categorie()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class, 'categorie_id');
     }
 
 }

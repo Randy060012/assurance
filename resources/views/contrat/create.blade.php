@@ -132,10 +132,8 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Prime nette <font color="red">*</font></label>
-                                <input type="text" class="form-control" name="prime_nette" required>
+                                <input type="number" step="0.01" class="form-control" name="prime_nette" id="primeNette" required>
                             </div>
-
-
 
                             <div class="col-md-6">
                                 <label class="form-label">Prime TTC</label>
@@ -164,13 +162,14 @@
                             <div class="col-md-4">
                                 <label class="form-label">Apporteur <font color="red">*</font></label>
                                 <select class="form-control" name="apporteur_id" id="apporteurSelect" required disabled>
-                                    <option value="">Sélectionnez un apporteur</option>
+                                    
                                 </select>
+                                <span id="pourcentageInput" class="form-control-plaintext fw-bold">—</span>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Commission <font color="red">*</font></label>
-                                <input type="text" class="form-control" name="commission" readonly>
+                                <input type="text" class="form-control" name="commission" id="commissionField" readonly>
                             </div>
 
                         </div>
@@ -285,35 +284,121 @@
         document.getElementById('closeModalButton').click();
     }
 
+    // document.getElementById('categorieSelect').addEventListener('change', function() {
+    //     let categorieId = this.value;
+    //     let apporteurSelect = document.getElementById('apporteurSelect');
+
+    //     if (!categorieId) {
+    //         apporteurSelect.innerHTML = '<option value="">Sélectionnez un apporteur</option>';
+    //         apporteurSelect.disabled = true;
+    //         return;
+    //     }
+
+    //     fetch(`/get-apporteur/${categorieId}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             apporteurSelect.innerHTML = '';
+
+    //             if (data.id) {
+    //                 apporteurSelect.innerHTML = `<option value="${data.id}">${data.nom ?? data.prenom}</option>`;
+    //                 apporteurSelect.disabled = false;
+    //             } else {
+    //                 apporteurSelect.innerHTML = '<option value="">Aucun apporteur trouvé</option>';
+    //                 apporteurSelect.disabled = true;
+    //             }
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //             apporteurSelect.innerHTML = '<option value="">Erreur de chargement</option>';
+    //             apporteurSelect.disabled = true;
+    //         });
+    // });
+
+</script>
+
+
+<script>
+    let tauxPourcentage = 0;
+    let apporteurSelectionne = false;
+    const apporteurSelect = document.getElementById('apporteurSelect');
+    const primeNetteInput = document.getElementById('primeNette');
+    const commissionField = document.getElementById('commissionField');
+    const pourcentageInput = document.getElementById('pourcentageInput');
+
     document.getElementById('categorieSelect').addEventListener('change', function() {
-        let categorieId = this.value;
-        let apporteurSelect = document.getElementById('apporteurSelect');
-
+        const categorieId = this.value;
         if (!categorieId) {
-            apporteurSelect.innerHTML = '<option value="">Sélectionnez un apporteur</option>';
+            apporteurSelect.innerHTML = '<option value="">Aucun apporteur trouvé</option>';
             apporteurSelect.disabled = true;
-            return;
+            return; 
         }
-
+        apporteurSelect.innerHTML =""
         fetch(`/get-apporteur/${categorieId}`)
-            .then(res => res.json())
+            .then(response => response.json())
             .then(data => {
-                apporteurSelect.innerHTML = '';
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(taux => {
+                        if (taux.apporteur) {
+                            let nomComplet = `${taux.apporteur.nom ?? ''} ${taux.apporteur.prenom ?? ''}`.trim();
+                            apporteurSelect.innerHTML += `
+                                <option value="${taux.id}" data-pourcentage="${taux.pourcentage}">
+                                    ${nomComplet}
+                                </option>`;
+                        }
+                    });
 
-                if (data.id) {
-                    apporteurSelect.innerHTML = `<option value="${data.id}">${data.nom ?? data.prenom}</option>`;
                     apporteurSelect.disabled = false;
+                    tauxPourcentage = parseFloat(data.pourcentage);
+                    document.getElementById('pourcentageInput').value = tauxPourcentage;
+                    pourcentageInput.value = tauxPourcentage;
+                    apporteurSelectionne = false;
                 } else {
                     apporteurSelect.innerHTML = '<option value="">Aucun apporteur trouvé</option>';
                     apporteurSelect.disabled = true;
+                    document.getElementById('pourcentageInput').value = '';
+                    commissionField.value = '';
+                    tauxPourcentage = 0;
+                    apporteurSelectionne = false;
                 }
             })
             .catch(err => {
                 console.error(err);
                 apporteurSelect.innerHTML = '<option value="">Erreur de chargement</option>';
                 apporteurSelect.disabled = true;
+                document.getElementById('pourcentageInput').value = '';
+                commissionField.value = '';
+                tauxPourcentage = 0;
+                apporteurSelectionne = false;
             });
     });
+
+    apporteurSelect.addEventListener('change', function() {
+        if (this.value) {
+            apporteurSelectionne = true;
+            const primeNette = parseFloat(primeNetteInput.value);
+            if (!isNaN(primeNette)) {
+                calculerCommission(primeNette, tauxPourcentage);
+            }
+        } else {
+            commissionField.value = '';
+            apporteurSelectionne = false;
+        }
+    });
+
+    primeNetteInput.addEventListener('input', function() {
+        const primeNette = parseFloat(this.value);
+        if (!isNaN(primeNette) && apporteurSelectionne && !isNaN(tauxPourcentage)) {
+            calculerCommission(primeNette, tauxPourcentage);
+        } else {
+            commissionField.value = '';
+        }
+    });
+
+    function calculerCommission(primeNette, pourcentage) {
+        const commission = (primeNette * pourcentage) / 100;
+        commissionField.value = commission.toFixed(2);
+    }
 </script>
+
 
 @endsection

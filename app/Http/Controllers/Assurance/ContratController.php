@@ -25,13 +25,13 @@ class ContratController extends Controller
 
     public function getApporteur($categorie_id)
     {
-        $taux = Taux::with('apporteur')->where('categorie_id', $categorie_id)->first();
+        $taux = Taux::with('apporteur')->where('categorie_id', $categorie_id)->get();
 
-        if (!$taux || !$taux->apporteur) {
+        if (!$taux) {
             return response()->json(['error' => 'Aucun apporteur trouvé'], 404);
         }
 
-        return response()->json($taux->apporteur);
+        return response()->json($taux);
     }
 
     /**

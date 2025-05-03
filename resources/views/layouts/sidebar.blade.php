@@ -389,9 +389,6 @@
                         <li>
                             <a href="{{ route('index.categorie')}}">Categorie</a>
                         </li>
-                        <li>
-                            <a href="{{ route('index.taux')}}">Taux</a>
-                        </li>
                         <!-- <li>
                             <a href="javascript: void(0);">Rapport</a>
                         </li> -->
@@ -403,10 +400,13 @@
                             <div class="collapse" id="contratSecondLevel">
                                 <ul class="side-nav-third-level">
                                     <li>
-                                        <a href="javascript: void(0);">Item 1</a>
+                                        <a href="javascript: void(0);">Bordereaux des <br> Echéances</a>
                                     </li>
                                     <li>
-                                        <a href="javascript: void(0);">Item 2</a>
+                                        <a href="javascript: void(0);">Liste des Contrats</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Listing des Numero <br> provisoire</a>
                                     </li>
                                 </ul>
                             </div>
@@ -424,7 +424,10 @@
                 <div class="collapse" id="opeMultiLevel">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="javascript: void(0);">Caisse</a>
+                            <a href="{{ route('index.depense')}}">Caisse</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('index.tdd')}}">Types dépenses</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#opeSecondLevel" aria-expanded="false" aria-controls="opeSecondLevel">
@@ -434,11 +437,18 @@
                             <div class="collapse" id="opeSecondLevel">
                                 <ul class="side-nav-third-level">
                                     <li>
-                                        <a href="javascript: void(0);">Item 1</a>
+                                        <a href="javascript: void(0);">Listing des Depenses</a>
                                     </li>
                                     <li>
-                                        <a href="javascript: void(0);">Item 2</a>
+                                        <a href="javascript: void(0);">Liste des Reglements</a>
                                     </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Listing des Depots</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Liste des commissions</a>
+                                    </li>
+                                     
                                 </ul>
                             </div>
                         </li>
@@ -489,7 +499,7 @@
                             <a href="{{ route('index.apporteur')}}">Nouveau</a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);">Taux commissions</a>
+                            <a href="{{ route('index.taux')}}">Taux commissions</a>
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#appSecondLevel" aria-expanded="false" aria-controls="appSecondLevel">
@@ -499,10 +509,8 @@
                             <div class="collapse" id="appSecondLevel">
                                 <ul class="side-nav-third-level">
                                     <li>
-                                        <a href="javascript: void(0);">Item 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript: void(0);">Item 2</a>
+                                        <a href="javascript: void(0);">Taux des commissions <br>
+                                             apporteur/categorie</a>
                                     </li>
                                 </ul>
                             </div>

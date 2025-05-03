@@ -24,7 +24,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="header-title mb-0">Tableau</h4>
                     <div>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#standard-modal">Enregistrer</a>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#standard-modal">Nouveau</a>
                     </div>
                 </div>
                 <div class="card-body">

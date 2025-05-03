@@ -14,7 +14,7 @@
                         <!-- <li class="breadcrumb-item active">Form Advanced</li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Enregistrer un utilisateur</h4>
+                <h4 class="page-title">Nouveau un utilisateur</h4>
             </div>
         </div>
     </div>
